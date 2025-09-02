@@ -1,0 +1,5 @@
+{
+  "name": "Ollama Branching Chat",
+  "description": "An advanced chat application that uses local Ollama models to create branching conversations from any point in the chat history, enabling exploration of multiple topics without losing the context of the original discussion.",
+  "requestFramePermissions": []
+}
