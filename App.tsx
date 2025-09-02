@@ -14,6 +14,8 @@ import {
   UserGroupIcon,
 } from './components/icons';
 import WelcomeScreen from './components/WelcomeScreen';
+import { STORAGE_KEY } from './constants';
+import './index.css';
 import { getAvailableModels, getOllamaResponse } from './services/ollamaService';
 import type {
   Agent,
@@ -25,7 +27,6 @@ import type {
   Settings,
 } from './types';
 import { DEFAULT_AGENT } from './types';
-import { STORAGE_KEY } from './constants';
 
 const defaultSettings: Settings = {
   isCompactMode: false,
@@ -198,27 +199,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                 className={`inline-block w-4 h-4 transform bg-white rounded-full transition-transform ${tempSettings.isCompactMode ? 'translate-x-6' : 'translate-x-1'}`}
               />
             </button>
-          </div>
-          <div>
-            <label className="block font-medium text-black mb-2">Available Ollama Models</label>
-            <p className="text-sm text-gray-500 mb-2">Local Ollama models</p>
-            <div className="space-y-2 max-h-40 overflow-y-auto">
-              {tempSettings.availableModels.length > 0 ? (
-                tempSettings.availableModels.map((model) => (
-                  <div
-                    key={model.name}
-                    className="flex items-center justify-between p-2 bg-gray-50 rounded-md"
-                  >
-                    <span className="font-medium text-sm">{model.name}</span>
-                    <span className="text-xs text-gray-500">
-                      {(model.size / 1024 / 1024 / 1024).toFixed(1)} GB
-                    </span>
-                  </div>
-                ))
-              ) : (
-                <p className="text-sm text-gray-500">Loading models...</p>
-              )}
-            </div>
           </div>
         </div>
         <div className="p-4 border-t border-black flex justify-end items-center gap-3 bg-white">
