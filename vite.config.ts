@@ -9,5 +9,6 @@ export default defineConfig(({ mode }) => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    assetsInclude: ['**/*.png'],
   };
 });

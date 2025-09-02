@@ -10,6 +10,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   isCompactMode,
   modelName,
   agentName,
+  hideActions = false,
 }) => {
   const [popover, setPopover] = useState<{ x: number; y: number; text: string } | null>(null);
   const [copied, setCopied] = useState(false);
@@ -111,23 +112,27 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           </div>
         )}
         {/* Hover actions: copy outside bubble */}
-        <button
-          onClick={handleCopy}
-          className={`absolute top-1/2 -translate-y-1/2 ${copyPositionClass} opacity-0 group-hover:opacity-100 transition-all duration-200 p-2 rounded-full bg-white shadow-sm border border-gray-200 hover:bg-gray-50`}
-          aria-label="Copy message"
-          title={copied ? 'Copied!' : 'Copy'}
-        >
-          <CopyIcon className="w-4 h-4 text-gray-700" />
-        </button>
-        {!isUser && (
-          <button
-            onClick={() => onStartBranch(message.id, message.text)}
-            className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-[calc(100%+3.25rem)] opacity-0 group-hover:opacity-100 transition-all duration-200 p-2 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            aria-label="Create new branch from this message"
-            title="Create new branch"
-          >
-            <BranchIcon className="w-5 h-5 text-gray-700" />
-          </button>
+        {!hideActions && (
+          <>
+            <button
+              onClick={handleCopy}
+              className={`absolute top-1/2 -translate-y-1/2 ${copyPositionClass} opacity-0 group-hover:opacity-100 transition-all duration-200 p-2 rounded-full bg-white shadow-sm border border-gray-200 hover:bg-gray-50`}
+              aria-label="Copy message"
+              title={copied ? 'Copied!' : 'Copy'}
+            >
+              <CopyIcon className="w-4 h-4 text-gray-700" />
+            </button>
+            {!isUser && (
+              <button
+                onClick={() => onStartBranch(message.id, message.text)}
+                className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-[calc(100%+3.25rem)] opacity-0 group-hover:opacity-100 transition-all duration-200 p-2 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                aria-label="Create new branch from this message"
+                title="Create new branch"
+              >
+                <BranchIcon className="w-5 h-5 text-gray-700" />
+              </button>
+            )}
+          </>
         )}
       </div>
       <div

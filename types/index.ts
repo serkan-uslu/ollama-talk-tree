@@ -103,6 +103,7 @@ export interface ConversationThreadProps {
   onStartBranch: (messageId: string, selectedText: string) => void;
   isCompactMode: boolean;
   agents: Record<string, Agent>;
+  hideActions?: boolean;
 }
 
 export interface MessageBubbleProps {
@@ -111,6 +112,7 @@ export interface MessageBubbleProps {
   isCompactMode: boolean;
   modelName?: string;
   agentName?: string;
+  hideActions?: boolean;
 }
 
 export interface WelcomeScreenProps {

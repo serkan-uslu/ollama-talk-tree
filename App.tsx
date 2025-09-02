@@ -111,6 +111,7 @@ const TreeModal: React.FC<TreeModalProps> = ({
               onStartBranch={() => {}} // Disable branching in preview
               isCompactMode={settings.isCompactMode}
               agents={agents}
+              hideActions={true}
             />
           </div>
         </div>

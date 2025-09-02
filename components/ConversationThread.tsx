@@ -8,6 +8,7 @@ const ConversationThread: React.FC<ConversationThreadProps> = ({
   onStartBranch,
   isCompactMode,
   agents,
+  hideActions = false,
 }) => {
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
@@ -28,6 +29,7 @@ const ConversationThread: React.FC<ConversationThreadProps> = ({
               isCompactMode={isCompactMode}
               modelName={msg.model}
               agentName={agent?.name}
+              hideActions={hideActions}
             />
           );
         })}

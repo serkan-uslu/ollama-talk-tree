@@ -33,6 +33,7 @@ const BranchNode: React.FC<BranchNodeProps> = ({
     : truncate(node.text, 30);
 
   let bgClass = 'hover:bg-gray-100 text-black';
+  const textClass = node.sender === 'user' ? 'text-blue-600' : 'text-gray-800';
   if (isPreviewNode) {
     bgClass = 'bg-blue-600 text-white';
   } else if (isActiveNode) {
@@ -102,7 +103,7 @@ const BranchNode: React.FC<BranchNodeProps> = ({
             )}
             <div className="truncate">
               <span
-                className={`font-medium ${!isPreviewNode && (node.sender === 'user' ? 'text-blue-600' : 'text-gray-800')}`}
+                className={`font-medium ${!isPreviewNode ? textClass : ''}`}
               >
                 {node.sender === 'user' ? 'You: ' : 'AI: '}
               </span>
@@ -254,17 +255,17 @@ const BranchNavigator: React.FC<BranchNavigatorProps> = ({
                   tabIndex={0}
                   onKeyDown={(e) => e.key === 'Enter' && handleSearchResultClick(node.id)}
                 >
-                  <div className="flex justify-between items-center text-xs text-gray-500 mb-1">
-                    <span
-                      className={`font-bold ${node.sender === 'user' ? 'text-blue-600' : 'text-gray-800'}`}
-                    >
-                      {node.sender === 'user' ? 'You' : 'AI'}
+                  <div className="flex items-start">
+                    <span className={`font-medium ${node.sender === 'user' ? 'text-blue-600' : 'text-gray-800'}`}>
+                      {node.sender === 'user' ? 'You: ' : 'AI: '}
                     </span>
-                    <span>{new Date(node.timestamp).toLocaleDateString()}</span>
+                    <div className="flex-1 truncate ml-1">
+                      <HighlightedText text={node.text} highlight={searchQuery} />
+                    </div>
+                    <span className="ml-2 text-xs text-gray-500 shrink-0">
+                      {new Date(node.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </span>
                   </div>
-                  <p className="text-sm text-black truncate">
-                    <HighlightedText text={node.text} highlight={searchQuery} />
-                  </p>
                 </div>
               ))
             ) : (

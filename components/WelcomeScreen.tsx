@@ -1,6 +1,7 @@
 import React from 'react';
 import { BranchIcon, TreeIcon, PlusIcon } from './icons';
-import { WelcomeScreenProps } from '@/types';
+import { WelcomeScreenProps } from '../types'; 
+import OllamaLogo from '../assets/ollama.png';
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   onNewConversation,
@@ -9,7 +10,12 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   return (
     <div className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-white overflow-y-auto">
       <div className="max-w-2xl w-full">
-        <h1 className="text-4xl font-bold text-black mb-4">Welcome to Ollama TalkTree</h1>
+        <div className="flex justify-center mb-6">
+          <div className="w-32 h-32 relative flex items-center justify-center">
+            <img src={OllamaLogo} alt="Ollama Logo" className="w-16" />
+          </div>
+        </div>
+        <h1 className="text-4xl font-bold text-black mb-4">Welcome to TalkTree Ollama</h1>
         <p className="text-lg text-gray-600 mb-8">
           A new way to explore conversations with AI. Never lose your train of thought again.
         </p>
