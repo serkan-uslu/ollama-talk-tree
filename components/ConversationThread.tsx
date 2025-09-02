@@ -1,14 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import type { MessageNode, Agent } from '../types';
+import type { ConversationThreadProps } from '../types';
 import MessageBubble from './MessageBubble';
-
-interface ConversationThreadProps {
-  messages: MessageNode[];
-  isLoading: boolean;
-  onStartBranch: (messageId: string, selectedText: string) => void;
-  isCompactMode: boolean;
-  agents: Record<string, Agent>;
-}
 
 const ConversationThread: React.FC<ConversationThreadProps> = ({
   messages,

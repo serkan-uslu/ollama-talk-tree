@@ -36,13 +36,28 @@ export async function getOllamaResponse(
   systemPrompt?: string,
 ): Promise<ChatResult> {
   try {
-    const requestBody: any = {
+    const requestBody: {
+      model: string;
+      messages: Array<{ role: string; content: string }>;
+      stream?: false;
+    } = {
       model,
       messages: systemPrompt ? [{ role: 'system', content: systemPrompt }, ...messages] : messages,
       stream: false,
     };
 
-    const response = (await ollama.chat(requestBody)) as any;
+    type OllamaChatResponse = {
+      message?: { content: string };
+      content?: string;
+      prompt_eval_count?: number;
+      eval_count?: number;
+      total_duration?: number;
+      load_duration?: number;
+      prompt_eval_duration?: number;
+      eval_duration?: number;
+    };
+
+    const response: OllamaChatResponse = await ollama.chat(requestBody);
     // response shape from REST: { message:{content}, total_duration, load_duration, prompt_eval_count, ... }
     return {
       content: response?.message?.content ?? response?.content ?? '',

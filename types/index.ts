@@ -57,3 +57,82 @@ export interface ConversationState {
   createdAt: string;
   agentId: string;
 }
+
+export interface BranchNavigatorProps {
+  nodes: Nodes;
+  rootId: string | null;
+  activeNodeId: string | null;
+  previewNodeId: string | null;
+  onNodeSelect: (nodeId: string) => void;
+}
+
+export interface BranchNodeProps {
+  nodeId: string;
+  nodes: Nodes;
+  activeNodeId: string | null;
+  previewNodeId: string | null;
+  onNodeSelect: (nodeId: string) => void;
+  level: number;
+  activePath: Set<string>;
+  expandedNodes: Set<string>;
+  onToggleExpand: (nodeId: string) => void;
+  isLast: boolean;
+  parentTreeState: boolean[];
+}
+
+export interface ChatInputProps {
+  onSendMessage: (message: string) => void;
+  isLoading: boolean;
+  branchSourceText?: string;
+  onCancelBranch?: () => void;
+  disabled?: boolean;
+}
+
+export interface ConversationListProps {
+  conversations: Record<string, ConversationState>;
+  activeConversationId: string | null;
+  onSelectConversation: (id: string) => void;
+  onNewConversation: () => void;
+  onRenameConversation: (id: string, newName: string) => void;
+  onDeleteConversation: (id: string) => void;
+}
+
+export interface ConversationThreadProps {
+  messages: MessageNode[];
+  isLoading: boolean;
+  onStartBranch: (messageId: string, selectedText: string) => void;
+  isCompactMode: boolean;
+  agents: Record<string, Agent>;
+}
+
+export interface MessageBubbleProps {
+  message: MessageNode;
+  onStartBranch: (messageId: string, selectedText: string) => void;
+  isCompactMode: boolean;
+  modelName?: string;
+  agentName?: string;
+}
+
+export interface WelcomeScreenProps {
+  onNewConversation: () => void;
+  showNewChatButton?: boolean;
+}
+
+export interface SearchFilters {
+  query: string;
+  agentId: string | 'any';
+  model: string | 'any';
+  dateFrom: string | '';
+  dateTo: string | '';
+}
+
+export interface SearchHit {
+  conversationId: string;
+  conversationName: string;
+  nodeId: string;
+  sender: 'user' | 'ai';
+  text: string;
+  timestamp: string;
+  agentName?: string;
+  model?: string;
+}

@@ -1,16 +1,8 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import type { MessageNode } from '../types';
-import { BranchIcon, CopyIcon } from './icons';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-
-interface MessageBubbleProps {
-  message: MessageNode;
-  onStartBranch: (messageId: string, selectedText: string) => void;
-  isCompactMode: boolean;
-  modelName?: string;
-  agentName?: string;
-}
+import type { MessageBubbleProps } from '../types';
+import { BranchIcon, CopyIcon } from './icons';
 
 const MessageBubble: React.FC<MessageBubbleProps> = ({
   message,

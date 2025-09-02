@@ -1,28 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import type { Nodes } from '../types/index';
+import type { BranchNavigatorProps, BranchNodeProps } from '../types/index';
 import { ChevronDownIcon, ChevronRightIcon, CloseIcon, SearchIcon } from './icons';
 
-interface BranchNavigatorProps {
-  nodes: Nodes;
-  rootId: string | null;
-  activeNodeId: string | null;
-  previewNodeId: string | null;
-  onNodeSelect: (nodeId: string) => void;
-}
-
-const BranchNode: React.FC<{
-  nodeId: string;
-  nodes: Nodes;
-  activeNodeId: string | null;
-  previewNodeId: string | null;
-  onNodeSelect: (nodeId: string) => void;
-  level: number;
-  activePath: Set<string>;
-  expandedNodes: Set<string>;
-  onToggleExpand: (nodeId: string) => void;
-  isLast: boolean;
-  parentTreeState: boolean[];
-}> = ({
+const BranchNode: React.FC<BranchNodeProps> = ({
   nodeId,
   nodes,
   activeNodeId,

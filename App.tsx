@@ -15,10 +15,17 @@ import {
 } from './components/icons';
 import WelcomeScreen from './components/WelcomeScreen';
 import { getAvailableModels, getOllamaResponse } from './services/ollamaService';
-import type { Agent, ConversationState, MessageNode, Nodes, Settings } from './types';
+import type {
+  Agent,
+  ConversationState,
+  MessageNode,
+  Nodes,
+  SearchFilters,
+  SearchHit,
+  Settings,
+} from './types';
 import { DEFAULT_AGENT } from './types';
-
-const STORAGE_KEY = 'ollama-branching-chat-state-v3-agents';
+import { STORAGE_KEY } from './constants';
 
 const defaultSettings: Settings = {
   isCompactMode: false,
@@ -431,25 +438,6 @@ const AgentsModal: React.FC<AgentsModalProps> = ({
     </div>
   );
 };
-
-interface SearchFilters {
-  query: string;
-  agentId: string | 'any';
-  model: string | 'any';
-  dateFrom: string | '';
-  dateTo: string | '';
-}
-
-interface SearchHit {
-  conversationId: string;
-  conversationName: string;
-  nodeId: string;
-  sender: 'user' | 'ai';
-  text: string;
-  timestamp: string;
-  agentName?: string;
-  model?: string;
-}
 
 const App: React.FC = () => {
   const [conversations, setConversations] = useState<Record<string, ConversationState>>({});
@@ -908,14 +896,6 @@ const App: React.FC = () => {
               >
                 Search
               </button>
-              {/* <button
-                      onClick={() => setIsCompareOpen(true)}
-                      disabled={!currentConversation || !currentConversation.activeNodeId}
-                      className="px-3 py-2 text-sm font-medium text-black bg-gray-100 rounded-md hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                      aria-label="Compare branches"
-                    >
-                      Compare
-                    </button> */}
               <button
                 onClick={() => setIsAgentsModalOpen(true)}
                 className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-black bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"

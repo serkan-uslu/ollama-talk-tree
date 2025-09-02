@@ -1,13 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { SendIcon, CloseIcon } from './icons';
-
-interface ChatInputProps {
-  onSendMessage: (message: string) => void;
-  isLoading: boolean;
-  branchSourceText?: string;
-  onCancelBranch?: () => void;
-  disabled?: boolean;
-}
+import React, { useEffect, useRef, useState } from 'react';
+import { CloseIcon, SendIcon } from './icons';
+import { ChatInputProps } from '@/types';
 
 const ChatInput: React.FC<ChatInputProps> = ({
   onSendMessage,
@@ -38,7 +31,6 @@ const ChatInput: React.FC<ChatInputProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      // Cast the event to satisfy the handler, as preventDefault is all we need
       handleSubmit(e as unknown as React.FormEvent);
     }
   };

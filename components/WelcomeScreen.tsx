@@ -1,10 +1,6 @@
 import React from 'react';
 import { BranchIcon, TreeIcon, PlusIcon } from './icons';
-
-interface WelcomeScreenProps {
-  onNewConversation: () => void;
-  showNewChatButton?: boolean;
-}
+import { WelcomeScreenProps } from '@/types';
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   onNewConversation,

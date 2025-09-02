@@ -1,15 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import type { ConversationState } from '../types';
+import type { ConversationListProps, ConversationState } from '../types';
 import { PlusIcon, ChatBubbleLeftIcon, PencilIcon, TrashIcon } from './icons';
-
-interface ConversationListProps {
-  conversations: Record<string, ConversationState>;
-  activeConversationId: string | null;
-  onSelectConversation: (id: string) => void;
-  onNewConversation: () => void;
-  onRenameConversation: (id: string, newName: string) => void;
-  onDeleteConversation: (id: string) => void;
-}
 
 const ConversationList: React.FC<ConversationListProps> = ({
   conversations,
